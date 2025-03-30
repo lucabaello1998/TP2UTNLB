@@ -1,35 +1,57 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from "react";
+import DetalleProducto from "./components/ProductDetail";
+import "./App.css";
+
+const productos = [
+  {
+    nombre: "Moto Razr",
+    imagen: "./assets/motoRazr.webp",
+    precioReal: 419999,
+    descuento: 20,
+    stock: 10,
+  },
+  {
+    nombre: "Redmi Note 13 Pro",
+    imagen: "./assets/redminote13pro.webp",
+    precioReal: 299999,
+    descuento: 60,
+    stock: 15,
+  },
+  {
+    nombre: "Redmi Note 14 Pro+",
+    imagen: "./assets/RedmiNote14pro+.webp",
+    precioReal: 349999,
+    descuento: 40,
+    stock: 8,
+  },
+  {
+    nombre: "Tecno Pova 6",
+    imagen: "./assets/tecnopova6.webp",
+    precioReal: 199999,
+    descuento: 80,
+    stock: 20,
+  },
+];
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="app">
+      <h1>Catálogo de Productos</h1>
+      <div className="lista-productos">
+        {productos.map((producto, index) => (
+          <DetalleProducto
+            key={index}
+            nombre={producto.nombre}
+            imagen={producto.imagen}
+            precioReal={producto.precioReal}
+            precioFinal={Math.round(producto.precioReal - (producto.precioReal * producto.descuento) / 100)}
+            descuento={producto.descuento}
+            stock={producto.stock}
+          />
+        ))}
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </div>
+  );
 }
 
-export default App
+export default App;
